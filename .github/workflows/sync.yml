@@ -31,8 +31,6 @@ jobs:
           git fetch upstream main
 
           UPSTREAM=$(git rev-parse upstream/main)
-          LOCAL_DEPLOY_FILES=".github/workflows/deploy.yml .github/workflows/sync.yml wrangler.toml package.json package-lock.json"
-
           git checkout upstream/main -- _worker.js
           python3 - <<'PY'
           from pathlib import Path
