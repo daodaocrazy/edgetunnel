@@ -1,12 +1,6 @@
 name: Deploy edgetunnel Worker
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - '_worker.js'
-      - 'wrangler.toml'
-      - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
 concurrency:
