@@ -37,13 +37,3 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_GMAIL }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_GMAIL }}
           command: deploy --config wrangler.generated.toml
-
-      - name: Deploy Pages fallback
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_GMAIL }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_GMAIL }}
-        run: |
-          mkdir -p pages-dist
-          cp _worker.js pages-dist/_worker.js
-          npx wrangler pages project create edgetunnel-pages-gmail --production-branch=main || true
-          npx wrangler pages deploy pages-dist --project-name=edgetunnel-pages-gmail --branch=main --commit-dirty=true
