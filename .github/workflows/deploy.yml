@@ -23,9 +23,17 @@ jobs:
       - name: Install Wrangler
         run: npm install --no-save wrangler@4
 
+      - name: Generate Wrangler config
+        env:
+          EDGETUNNEL_ADMIN: ${{ secrets.EDGETUNNEL_ADMIN }}
+          EDGETUNNEL_UUID: ${{ secrets.EDGETUNNEL_UUID }}
+        run: |
+          cp wrangler.toml wrangler.generated.toml
+          printf '\n[vars]\nADMIN = "%s"\nUUID = "%s"\n' "$EDGETUNNEL_ADMIN" "$EDGETUNNEL_UUID" >> wrangler.generated.toml
+
       - name: Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_GMAIL }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_GMAIL }}
-          command: deploy
+          command: deploy --config wrangler.generated.toml
