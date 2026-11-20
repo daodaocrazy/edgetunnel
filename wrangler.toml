@@ -8,6 +8,3 @@ workers_dev = false
 pattern = "edgetunnel.daodaocrazy.qzz.io/*"
 zone_name = "daodaocrazy.qzz.io"
 
-[[kv_namespaces]]
-binding = "KV"
-id = "13a367b3c8354becb463a9e34f959070"
